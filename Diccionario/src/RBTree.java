@@ -1,2 +1,2 @@
-public class RBTree {
+public class RBTree implements Tree {
 }

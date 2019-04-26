@@ -1,6 +1,6 @@
-public class FactoryTree<E> {
+public class FactoryTree{
     //Factory that creates instances
-    public E getTree(String treeType) {
+    public Tree getTree(String treeType) {
         if (treeType == null) {
             return null;
         }

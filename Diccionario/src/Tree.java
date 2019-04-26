@@ -1,2 +1,2 @@
-public interface Tree {
+public interface    Tree {
 }

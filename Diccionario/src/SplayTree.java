@@ -1,2 +1,2 @@
-public class SplayTree {
+public class SplayTree implements Tree {
 }
