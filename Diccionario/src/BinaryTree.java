@@ -51,7 +51,7 @@ public class BinaryTree {
     }
     //Comienza el root
     public boolean containsNode(String value) {
-        return containsNodeRecursive(root, valor);
+        return containsNodeRecursive(root, value);
     }
 
     // All nodes are visited in ascending order
