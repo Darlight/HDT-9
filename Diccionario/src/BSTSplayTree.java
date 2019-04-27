@@ -3,7 +3,7 @@ public class BSTSplayTree<K extends Comparable<K>, V> {
     protected SplayTree<SplayTreeAssociation<K, V>> tree;
 
     public BSTSplayTree(){
-        tree = new SplayTree<>();
+        tree = new SplayTree<E>();
     }
 
     public V put(K clave, V valor){

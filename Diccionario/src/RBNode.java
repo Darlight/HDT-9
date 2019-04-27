@@ -2,16 +2,16 @@
 public class RBNode implements Comparable<RBNode> {
 
     RBNode left, right;
-    String element;
+    int element;
     int color;
 
     /* Constructor */
-    public RBNode(String theElement)
+    public RBNode(int theElement)
     {
         this(theElement, null, null );
     }
     /* Constructor */
-    public RBNode(String theElement, RBNode lt, RBNode rt)
+    public RBNode(int theElement, RBNode lt, RBNode rt)
     {
         left = lt;
         right = rt;
@@ -20,7 +20,7 @@ public class RBNode implements Comparable<RBNode> {
     }
     @Override
     public int compareTo(RBNode diccionario) {
-        if (this.element == "palabra_ingles"){
+        if (this.element == 1){
             return 1;
 
         }
