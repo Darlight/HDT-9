@@ -6,6 +6,5 @@ public class Main {
         System.out.println("Porfavor, escoja que tipo de mapa va a utilizar \n");
         String map = scan.nextLine();
 
-
     }
 }
