@@ -9,65 +9,119 @@ import java.util.Collections;
 
 //Extraido de: http://www.newthinktank.com/2013/03/binary-tree-in-java/
 //Extraido de: https://www.baeldung.com/java-binary-tree
-public class BinaryTree {
+public class BinaryTree<E> {
 
-    Node root;
-    //Revisa si el nodo izquierdo o derecho tiene un valor mayor que el insertado
-    //En caso que sea cierto, crea el nodo izquierdo (menor cantidad) o nodo derecho
-    //(mayor cantidad).
-    private Node addRecursive(Node current, Association valor) {
-        if (current == null) {
-            return new Node(valor);
-        }
+    protected E value;
+    protected BinaryTree<E> parent, left, right;
 
-        if (valor.getKey() < current.valor.getKey()) {
-            current.left = addRecursive(current.left, valor);
-        } else if (valor.getKey() > current.valor.getKey()) {
-            current.right = addRecursive(current.right, valor);
-        } else {
-            // value already exists
-            return current;
-        }
-
-        return current;
-    }
-    //Agrega el nodo
-    public void add(Association value) {
-        root = addRecursive(root, value);
-    }
-    //Busca un nodo en especifico
-    private boolean containsNodeRecursive(Node current, String valor) {
-        // Palabra en asterisco, es decir, la palabra en ingles
-        if (current == null) {
-            return false;
-        }
-        //Retorna el valor en español
-        if (valor.getKey() == current.valor.getKey()) {
-            return true; //Retornar el nodo con su valor español
-        }
-        return valor.getKey() < current.valor.getKey()
-                ? containsNodeRecursive(current.left, valor)
-                : containsNodeRecursive(current.right, valor);
-    }
-    //Comienza el root
-    public boolean containsNode(String value) {
-        return containsNodeRecursive(root, value);
+    public BinaryTree()
+    {
+        value = null;
+        parent = left = right = null;
     }
 
-    // All nodes are visited in ascending order
-    // Recursion is used to go to one node and
-    // then go to its child nodes and so forth
-
-    //Orden trasversal In-Order
-    public void inOrderTraverseTree(Node focusNode) {
-        if (focusNode != null) {
-            // Traverse the left node
-
-            inOrderTraverseTree(focusNode.leftChild);
-            // Visit the currently focused on node
-            System.out.println(focusNode);
-            // Traverse the right node
-            inOrderTraverseTree(focusNode.rightChild);
-        }
+    public BinaryTree(E value)
+    {
+        this.value = value;
+        setLeft(new BinaryTree<>());
+        setRight(new BinaryTree<>());
     }
+
+    public BinaryTree(E value, BinaryTree<E> left, BinaryTree<E> right)
+    {
+        this(value);
+        if(left != null) setLeft(left);
+        if(right != null) setRight(right);
+    }
+
+    public BinaryTree<E> left() { return left; }
+    public BinaryTree<E> right() { return right; }
+    public BinaryTree<E> parent() { return parent; }
+
+    public void setLeft(BinaryTree<E> newLeft)
+    {
+        left = newLeft;
+        newLeft.setParent(this);
+    }
+
+    public void setRight(BinaryTree<E> newRight)
+    {
+        right = newRight;
+        newRight.setParent(this);
+    }
+
+    public boolean isLeftChild()
+    {
+        if(parent != null)
+        {
+            BinaryTree left = parent.left();
+            return this == left;
+        }
+        return false;
+    }
+
+    public boolean isRightChild()
+    {
+        if(parent != null)
+        {
+            BinaryTree right = parent.right();
+            return this == right;
+        }
+        return false;
+    }
+
+
+    public boolean isInternal()
+    {
+        return ((left() != null) || (right != null));
+    }
+
+    public E value() { return value; }
+
+    public void setValue(E newValue) { value = newValue; }
+
+    protected void setParent(BinaryTree<E> newParent)
+    {
+        parent = newParent;
+    }
+
+    protected boolean isEmpty()
+    {
+        return value == null;
+    }
+
+    protected BinaryTree<E> rotateRight()
+    {
+        BinaryTree<E> newRoot = left();
+        if(newRoot == null) return this;
+        BinaryTree<E> tempParent = this.parent();
+        boolean isLeft = this.isLeftChild();
+        setLeft(newRoot.right());
+        newRoot.setRight(this);
+        if(tempParent != null)
+        {
+            if(isLeft) tempParent.setLeft(newRoot);
+            else tempParent.setRight(newRoot);
+        }
+        else newRoot.setParent(null);
+        return newRoot;
+    }
+
+    protected BinaryTree<E> rotateLeft()
+    {
+        BinaryTree<E> newRoot = this.right();
+        if(newRoot == null) return this;
+        BinaryTree<E> tempParent = this.parent();
+        boolean isLeft = this.isLeftChild();
+        setRight(newRoot.left());
+        newRoot.setLeft(this);
+        if(tempParent != null)
+        {
+            if(isLeft) tempParent.setLeft(newRoot);
+            else tempParent.setRight(newRoot);
+        }
+        else newRoot.setParent(null);
+        return newRoot;
+    }
+
 }

@@ -1,4 +1,4 @@
-public class SplayTree implements Tree {
+public class SplayTree{
 
     private SplayNode root;
     private int count = 0;

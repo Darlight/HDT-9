@@ -1,11 +1,12 @@
 
 //Codigo extraido de https://www.sanfoundry.com/java-program-implement-red-black-tree/
-public class RBTree implements Tree {
+public class RBTree{
     private RBNode current;
     private RBNode parent;
     private RBNode grand;
     private RBNode great;
     private RBNode header;
+
     private static RBNode nullNode;
     static
     {

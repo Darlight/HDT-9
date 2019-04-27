@@ -1,4 +1,4 @@
-public class SplayNode implements Tree{
+public class SplayNode {
 
     SplayNode left, right, parent;
     int element;
