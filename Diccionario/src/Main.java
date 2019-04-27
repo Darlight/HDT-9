@@ -5,6 +5,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
+/*
+Universidad del Valle de Guatemala
+Seccion 10 - Pareja 9
+Josue Sagastume - 18173
+Mario Perdomo - 18029
+Main.java
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -18,23 +25,22 @@ public class Main {
         //Para leer el archivo
         System.out.println("Ingrese el nombre del diccionario");
         diccionario = scan.next();
-        ArrayList<String> archivo = new ArrayList<>();
+        ArrayList<String> texto = new ArrayList<>();
         try {
             Stream<String> lines = Files.lines(
                     Paths.get(diccionario + ".txt"),
                     StandardCharsets.UTF_8
             );
-            lines.forEach(archivo::add);
+            lines.forEach(texto::add);
         } catch (IOException e ){
             System.out.println("Ha ocurrido un error, porfavor verifique el nombre. \n");
         }
 
-        for (String linea : archivo) {
+        for (String linea : texto) {
             String lineaClean = linea.replaceAll("\t", " ").replaceAll(",", "").replaceAll(";", "");
 
             String ingles = lineaClean.trim().split("\\s+")[0].toLowerCase();
             String espanol = lineaClean.trim().split("\\s+")[1].toLowerCase();
-            arbol.put(i
         }
 
 
